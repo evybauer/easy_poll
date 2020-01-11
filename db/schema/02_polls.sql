@@ -1,7 +1,7 @@
 -- Drop and recreate pools table
 
-DROP TABLE IF EXISTS pools CASCADE;
- CREATE TABLE pools (
+DROP TABLE IF EXISTS polls CASCADE;
+ CREATE TABLE polls (
    id SERIAL PRIMARY KEY,
    creator_id INTEGER REFERENCES creators(id) NOT NULL,
    title VARCHAR(255) NOT NULL,
