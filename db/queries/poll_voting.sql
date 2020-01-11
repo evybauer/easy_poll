@@ -13,8 +13,6 @@ WHERE poll_id=1;
 
 
 
-
-
 -- SELECT DISTINCT polls.title, (SELECT options.choice
 --   FROM options
 --   WHERE poll_id=1)
