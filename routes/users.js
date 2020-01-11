@@ -24,3 +24,20 @@ module.exports = (db) => {
   return router;
 };
 
+// router.post("/authenticateUser", (req, res) => {
+//   console.log(req.body)
+//   const {email, password} = req.body;
+//   login(email, password)
+//     .then(user => {
+//       if (!user) {
+//         res.send({error: "error"});
+//         return;
+//       }
+//       req.session.userId = user.id;
+//       // res.send({user: {name: user.name, email: user.email, id: user.id}});
+//       res.redirect("/polls")
+//     })
+//     .catch(e => res.send(e));
+
+//   return router;
+// });
