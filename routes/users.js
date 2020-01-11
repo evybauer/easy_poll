@@ -41,3 +41,11 @@ module.exports = (db) => {
 
 //   return router;
 // });
+
+
+
+// LOGOUT
+router.post("/", (req, res) => {
+  req.session = null;
+  res.redirect("/");
+});

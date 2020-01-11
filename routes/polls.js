@@ -26,5 +26,36 @@ module.exports = (db) => {
 //     res.redirect("/");
 // });
 
+
+
+// SEE POLLS CREATED
+
+// CREATE THE POLL
+
+// router.get("/polls", (req, res) => {
+//   db.query(...)
+//   authentication of the user
+// })
+
+router.post("/polls", (req, res) => {
+  //const userId = req.session.userId;
+  database.addPoll({...req.body})
+  .then(poll => {
+    res.send(poll);
+  })
+  .catch(e => {
+    console.error(e);
+    res.send(e)
+  });
+});
+
+
+//SEE THE POLL
+//Where votes happen
+
+// SEE THE RESULTS
+
+
+
 // The creator will be loged in and will be able to see previous polls
 // Click on create and be redirected to the /polls/new where will fill out a new poll
