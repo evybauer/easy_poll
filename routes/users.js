@@ -55,8 +55,36 @@ router.post("/options", (req, res) => {
   });
 });
 
+router.get("/:poll_id/results", (req, res) => {
+  db('poll')
+    // .select("polls.title", "polls.description", "votes.rating")
+    // .join("votes", {"polls.admin_url": "poll_admin_url"})
+    // .where({ "poll.url": req.params.pid })
+    .then((votes) => {
+      try {
+        const options = results[0].options;
+        const question = results[0].question;
+        const rankedArray = [];
 
+        // Get ranks array from each response in db
+        results.forEach((result) => {
+          rankedArray.push(result.ranks);
+        });
 
+        // Sum ranks by index in rankedArray
+        let ranks = rankedArray.reduce((accumulator, current) => {
+          current.forEach((num, i) => {
+            accumulator[i] = (accumulator[i] || 0) + num;
+          });
+          return accumulator;
+        }, []);
+
+        res.json({ options, question, ranks });
+      } catch (error) {
+        console.error(error);
+      }
+    });
+});
 
 // LOGOUT
 router.post("/", (req, res) => {
