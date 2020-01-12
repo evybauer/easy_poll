@@ -24,6 +24,8 @@ module.exports = (db) => {
   return router;
 };
 
+// ROUTE OF VOTER
+
 // router.post("/authenticateUser", (req, res) => {
 //   console.log(req.body)
 //   const {email, password} = req.body;
@@ -41,6 +43,18 @@ module.exports = (db) => {
 
 //   return router;
 // });
+
+router.post("/options", (req, res) => {
+  database.countVotes()
+  .then(res => {
+    res.redirect("/results");
+  })
+  .catch(e => {
+    console.error(e);
+    res.send(e)
+  });
+});
+
 
 
 

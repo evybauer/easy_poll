@@ -35,7 +35,7 @@ app.use(express.static("public"));
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
-const loginRoutes = require("./routes/login");
+// const loginRoutes = require("./routes/login");
 // const pollsRoutes = require("./routes/polls");
 // const optionsRoutes = require("./routes/options");
 // const votesRoutes = require("./routes/votes");
@@ -45,7 +45,7 @@ const loginRoutes = require("./routes/login");
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
-app.use("/api/login", loginRoutes(db));
+// app.use("/api/login", loginRoutes(db));
 // app.use("/api/polls", pollsRoutes(db));
 // app.use("/api/options", optionsRoutes(db));
 // app.use("/api/votes", votesRoutes(db));
@@ -57,7 +57,7 @@ app.use("/api/login", loginRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("polls");
+  res.render("votes");
 });
 
 app.listen(PORT, () => {
