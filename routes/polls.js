@@ -37,7 +37,7 @@ module.exports = (db) => {
 //   authentication of the user
 // })
 
-router.post("/polls", (req, res) => {
+router.post("/", (req, res) => {
   //const userId = req.session.userId;
   database.addPoll({...req.body})
   .then(poll => {
