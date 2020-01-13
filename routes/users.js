@@ -9,11 +9,11 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
+  router.get("/login", (req, res) => {
+    db.query(`SELECT * FROM creators;`)
       .then(data => {
-        const users = data.rows;
-        res.json({ users });
+        const creator = data.rows[0].name;
+        res.json({ creator });
       })
       .catch(err => {
         res
@@ -25,24 +25,41 @@ module.exports = (db) => {
 };
 
 // ROUTE OF VOTER
+/**
+  * Check if a user exists with a given username and password
+   * @param {String} email
+   * @param {String} password encrypted
+ */
 
-// router.post("/authenticateUser", (req, res) => {
-//   console.log(req.body)
-//   const {email, password} = req.body;
-//   login(email, password)
-//     .then(user => {
-//       if (!user) {
-//         res.send({error: "error"});
-//         return;
-//       }
-//       req.session.userId = user.id;
-//       // res.send({user: {name: user.name, email: user.email, id: user.id}});
-//       res.redirect("/polls")
-//     })
-//     .catch(e => res.send(e));
+const login =  function(email, password) {
+  return database.getUserWithEmail(email)
+  .then(user => {
+    if (bcrypt.compareSync(password, user.password)) {
+      return user;
+    }
+    return null;
+  });
+}
+// exports.login = login;
 
-//   return router;
-// });
+router.post("/login", (req, res) => {
+  console.log(req.body);
+  const {email, password} = req.body;
+
+  login(email, password)
+    .then(user => {
+      if (!user) {
+        res.send({error: "error"});
+        return;
+      }
+      req.session.userId = user.id;
+      // res.send({user: {name: user.name, email: user.email, id: user.id}});
+      res.redirect("/polls")
+    })
+    .catch(e => res.send(e));
+
+  return router;
+});
 
 router.post("/options", (req, res) => {
   database.countVotes()
