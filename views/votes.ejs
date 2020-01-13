@@ -6,8 +6,11 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/votes.css" type="text/css" />
+
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Jura&display=swap" rel="stylesheet">
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -16,30 +19,60 @@
   <%- include('./partials/header'); %>
 
   <body>
-          <h3>Poll to vote</h3>
-            <form class="needs-validation" novalidate="">
+      <form>
+          <h2>Poll to vote</h2>
 
-            <h3>Question</h3>
+            <div class="form-group">
+            <h4>Question?</h4>
             <!--Add ejs to receive the info from the databse-->
+            </div>
 
+            <div class="form-group">
             <h4>Description</h4>
+            <label> This is the description of the question</label>
             <!--Add ejs to receive the info from the databse-->
+            </div>
 
-            <h3>Options</h3>
-            <!--Add ejs to receive the info from the databse-->
+            <div class="form-group">
+            <h4>Options</h4>
+            </div>
 
-            <button type="button" class="btn btn-dark">Option 1</button>
-            <button type="button" class="btn btn-dark">Option 2</button>
-            <button type="button" class="btn btn-dark">Option 3</button>
-            <button type="button" class="btn btn-dark">Option 4</button>
-            <!--Add ejs to receive the info from the databse-->
+            <div class="form-group">
 
-          <br><br>
-          <div>
-              <button type="button" class="btn btn-primary"> Vote </button>
-              <!--Button redirects o results/Thank you for voting-->
+              <div class="btn-group" role="group" aria-label="Third group">
+                <button type="button" class="btn btn-secondary">Option 1 <br> <label> Description of option</label> </button>
+              </div><br><br>
+
+              <div class="btn-group" role="group" aria-label="Third group">
+                <button type="button" class="btn btn-secondary">Option 2<br> <label> Description of option</label> </button>
+              </div><br><br>
+
+              <div class="btn-group" role="group" aria-label="Third group">
+                <button type="button" class="btn btn-secondary">Option 3 <br> <label> Description of option</label></button>
+              </div><br><br>
+
+              <div class="btn-group" role="group" aria-label="Third group">
+                  <button type="button" class="btn btn-secondary">Option 4 <br> <label> Description of option</label></button>
+                </div><br><br>
+
 
             </div>
-        </form>
+
+            <div class="form-group">
+                <label for="firstName">Name: </label>
+                <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+            </div>
+
+          <div class="form-group">
+              <button class="btn btn-outline-success btn-lg btn-block" type="submit">Create Form</button>
+            </div>
+
+          </form>
   </body>
 </html>
+
+
+
+
+
+
