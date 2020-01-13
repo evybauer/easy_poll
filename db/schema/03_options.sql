@@ -4,5 +4,6 @@ DROP TABLE IF EXISTS options CASCADE;
    id SERIAL PRIMARY KEY,
    choice VARCHAR(255) NOT NULL,
    poll_id INTEGER REFERENCES polls(id) NOT NULL,
+   vote_total BIGINT,
    description VARCHAR(255) NOT NULL
  );
