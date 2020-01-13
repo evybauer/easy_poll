@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home Page</title>
+    <title>Login Page</title>
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/login.css" type="text/css" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Jura&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Electrolize&display=swap" rel="stylesheet">
+
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -13,20 +19,24 @@
   </head>
 
   <body>
-      <form class="form-signin">
-          <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-          <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-          <label for="inputEmail" class="sr-only">Email address</label>
-          <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-          <label for="inputPassword" class="sr-only">Password</label>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-          <div class="checkbox mb-3">
-            <label>
-              <input type="checkbox" value="remember-me"> Remember me
-            </label>
+      <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <h1 class="display-4">Easy Poll</h1>
+            <p class="lead">An easy way to create polls and make decisions faster!</p>
           </div>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-          <p class="mt-5 mb-3 text-muted">© 2020</p>
+
+      <form>
+          <h2>Login</h2>
+
+            <div class="form-group" action="/users/login" method="POST">
+              <label for="inputEmail" class="sr-only">Email address</label>
+              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus=""><br>
+              <label for="inputPassword" class="sr-only">Password</label>
+              <input type="password" id="inputPassword" class="form-control" placeholder="Password" required=""><br>
+              </div><br>
+              <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+              <p class="mt-5 mb-3 text-muted">© 2020</p>
+            </div>
         </form>
   </body>
 </html>
