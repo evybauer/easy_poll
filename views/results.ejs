@@ -6,8 +6,10 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/results.css" type="text/css" />
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Jura&display=swap" rel="stylesheet">
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -16,21 +18,51 @@
   <%- include('./partials/header'); %>
 
   <body>
-          <h3>Results of Poll</h3>
             <form class="needs-validation" novalidate="">
 
-            <h3>Question</h3>
+
             <!--Add ejs to receive the info from the databse-->
 
-            <h4>Description</h4>
-            <!--Add ejs to receive the info from the databse-->
-
-            <h3>Options</h3>
-            <!--Add ejs to receive the info from the databse-->
-            <h1> Total 1   %</h1>
-            <h1> Total 2   %</h1>
-            <h1> Total 3   %</h1>
-            <h1> Total 4   %</h1>
         </form>
   </body>
 </html>
+
+
+<form>
+    <h2>Results of Poll</h2>
+
+      <div class="form-group">
+      <h4>Question?</h4>
+      <!--Add ejs to receive the info from the databse-->
+      </div>
+
+      <div class="form-group">
+      <h4>Description</h4>
+      <label> This is the description of the question</label>
+      <!--Add ejs to receive the info from the databse-->
+      </div>
+
+      <div class="form-group">
+      <h4>Rating</h4>
+      </div>
+
+      <div class="form-group">
+
+        <div class="progress" style="height: 30px">
+            <div name="otpion 1" class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"> 100% </div>
+          </div><br>
+
+          <div class="progress" style="height: 30px">
+            <div name="otpion 1" class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">100% </div>
+          </div><br>
+
+          <div class="progress" style="height: 30px">
+            <div name="otpion 1" class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"> 100%</div>
+          </div><br>
+
+          <div class="progress" style="height: 30px">
+            <div name="otpion 1" class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">100%</div>
+          </div><br>
+
+      </div>
+    </form>
