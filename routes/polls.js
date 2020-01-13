@@ -33,7 +33,7 @@ module.exports = db => {
   //     // authentication of the user
   // });
 
-  router.post("/", (req, res) => {
+  router.post("/secret_post", (req, res) => {
     //const userId = req.session.userId;
     database
       .addPoll({ ...req.body })
@@ -48,16 +48,18 @@ module.exports = db => {
 
   //SEE THE POLL
   //Where votes happen
-  router.get("/", (req, res) => {
+  let shortid = 1
+  router.get("/:shortid", (req, res) => {
+
     db.query(
       `
           SELECT options.choice, options.description, (SELECT polls.description AS question
             FROM polls
-            WHERE polls.id=2
+            WHERE polls.id=${shortid}
             ORDER BY polls.title)
           FROM options
-          WHERE poll_id=2;
-          `
+          WHERE poll_id=${shortid};
+      `
     )
       .then(data => {
         const polls = data.rows;
