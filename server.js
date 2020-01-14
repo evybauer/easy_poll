@@ -23,6 +23,7 @@ app.use(morgan('dev'));
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use("/styles", sass({
   src: __dirname + "/styles",
   dest: __dirname + "/public/styles",
@@ -38,7 +39,7 @@ const widgetsRoutes = require("./routes/widgets");
 // const loginRoutes = require("./routes/login");
 const pollsRoutes = require("./routes/polls");
 
-const dbHelpers = require('./lib/database')(db)
+const dbHelpers = require('./lib/database')(db);
 
 
 // Mount all resource routes
