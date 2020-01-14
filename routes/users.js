@@ -5,10 +5,10 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require('express');
-const router  = express.Router();
+const express = require("express");
+const router = express.Router();
 
-module.exports = (db) => {
+module.exports = db => {
   router.get("/login", (req, res) => {
     db.query(`SELECT * FROM creators;`)
       .then(data => {
@@ -16,9 +16,7 @@ module.exports = (db) => {
         res.json({ creator });
       })
       .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
+        res.status(500).json({ error: err.message });
       });
   });
   return router;
@@ -26,35 +24,34 @@ module.exports = (db) => {
 
 // ROUTE OF VOTER
 /**
-  * Check if a user exists with a given username and password
-   * @param {String} email
-   * @param {String} password encrypted
+ * Check if a user exists with a given username and password
+ * @param {String} email
+ * @param {String} password encrypted
  */
 
-const login =  function(email, password) {
-  return database.getUserWithEmail(email)
-  .then(user => {
+const login = function(email, password) {
+  return database.getUserWithEmail(email).then(user => {
     if (bcrypt.compareSync(password, user.password)) {
       return user;
     }
     return null;
   });
-}
+};
 // exports.login = login;
 
 router.post("/login", (req, res) => {
   console.log(req.body);
-  const {email, password} = req.body;
+  const { email, password } = req.body;
 
   login(email, password)
     .then(user => {
       if (!user) {
-        res.send({error: "error"});
+        res.send({ error: "error" });
         return;
       }
       req.session.userId = user.id;
       // res.send({user: {name: user.name, email: user.email, id: user.id}});
-      res.redirect("/polls")
+      res.redirect("/polls");
     })
     .catch(e => res.send(e));
 
@@ -62,29 +59,30 @@ router.post("/login", (req, res) => {
 });
 
 router.post("/options", (req, res) => {
-  database.countVotes()
-  .then(res => {
-    res.redirect("/results");
-  })
-  .catch(e => {
-    console.error(e);
-    res.send(e)
-  });
+  database
+    .countVotes()
+    .then(res => {
+      res.redirect("/results");
+    })
+    .catch(e => {
+      console.error(e);
+      res.send(e);
+    });
 });
 
 router.get("/:poll_id/results", (req, res) => {
-  db('poll')
+  db("poll")
     // .select("polls.title", "polls.description", "votes.rating")
     // .join("votes", {"polls.admin_url": "poll_admin_url"})
     // .where({ "poll.url": req.params.pid })
-    .then((votes) => {
+    .then(votes => {
       try {
         const options = results[0].options;
         const question = results[0].question;
         const rankedArray = [];
 
         // Get ranks array from each response in db
-        results.forEach((result) => {
+        results.forEach(result => {
           rankedArray.push(result.ranks);
         });
 
