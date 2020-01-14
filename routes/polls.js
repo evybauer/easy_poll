@@ -33,11 +33,18 @@ module.exports = db => {
   //     // authentication of the user
   // });
 
-  router.post("/secret_post", (req, res) => {
+  router.post("/secret", (req, res) => {
     //const userId = req.session.userId;
-    database
-      .addPoll({ ...req.body })
+    let poll = {
+      title: 'fonz',
+      description: 'eyyy'
+    }
+
+    db
+      .addPoll(poll)
+      // { ...req.body }
       .then(poll => {
+        console.log('Hello');
         res.send(poll);
       })
       .catch(e => {
