@@ -48,7 +48,7 @@ module.exports = db => {
 
   //SEE THE POLL
   //Where votes happen
-  let shortid = 1
+  let shortid = 1;
   router.get("/:shortid", (req, res) => {
 
     db.query(
