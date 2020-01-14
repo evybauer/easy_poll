@@ -42,6 +42,16 @@ module.exports = (dbHelpers) => {
       .catch(e => res.send(e));
     });
 
+    //SUCCESS MESSAGE CREATOR
+    router.get("/success", (req, res) => {
+      res.redirect("/success");
+    });
+
+    //THANK YOU MESSAGE VOTER
+    router.get("/thank_you", (req, res) => {
+      res.redirect("/thank_you");
+    });
+
   // router.post("/options", (req, res) => {
   //   dbHelpers.countVotes()
   //   .then(res => {
