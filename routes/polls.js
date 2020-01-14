@@ -33,11 +33,18 @@ module.exports = db => {
   //     // authentication of the user
   // });
 
-  router.post("/secret_post", (req, res) => {
+  router.post("/secret", (req, res) => {
     //const userId = req.session.userId;
-    database
-      .addPoll({ ...req.body })
+    let poll = {
+      title: 'fonz',
+      description: 'eyyy'
+    }
+
+    db
+      .addPoll(poll)
+      // { ...req.body }
       .then(poll => {
+        console.log('Hello');
         res.send(poll);
       })
       .catch(e => {
@@ -48,17 +55,17 @@ module.exports = db => {
 
   //SEE THE POLL
   //Where votes happen
-  let shortid = 1
   router.get("/:shortid", (req, res) => {
+    let shortid = 1;
 
     db.query(
       `
-          SELECT options.choice, options.description, (SELECT polls.description AS question
-            FROM polls
-            WHERE polls.id=${shortid}
-            ORDER BY polls.title)
-          FROM options
-          WHERE poll_id=${shortid};
+       SELECT options.choice, options.description, options.vote_total, (SELECT polls.description AS question
+         FROM polls
+         WHERE polls.id=${shortid}
+         ORDER BY polls.title)
+       FROM options
+       WHERE poll_id=${shortid};
       `
     )
       .then(data => {
@@ -70,10 +77,32 @@ module.exports = db => {
         res.status(500).json({ error: err.message });
       });
   });
-  return router;
-};
 
-// SEE THE RESULTS
+  // SEE THE RESULTS
+  router.get("/results", (req, res) => {
+    let shortid = 1;
 
+    db.query(
+      `
+      SELECT options.choice, options.description, options.vote_total, (SELECT polls.description AS question
+        FROM polls
+        WHERE polls.id=1
+        ORDER BY polls.title)
+        FROM options
+        WHERE poll_id=1;
+        `
+        )
+        .then(data => {
+          const widgets = data.rows;
+          res.json({ widgets });
+        })
+        .catch(err => {
+          res
+          .status(500)
+          .json({ error: err.message });
+        });
+      });
+      return router;
+    };
 // The creator will be loged in and will be able to see previous polls
 // Click on create and be redirected to the /polls/new where will fill out a new poll
