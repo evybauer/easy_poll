@@ -49,10 +49,11 @@ module.exports = db => {
 
    //SUCCESS MESSAGE
 
-   router.post("/polls",(req,res) => {
+   router.post("/polls", function(req,res) {
     // const Id = req.session.Id;
     console.log('request body', req.body);
-     db.addPoll({...req.body})
+    queries(db)
+     .addPoll(req.body)
      .then(poll => {
        res.send(poll);
        res.redirect("/success");
@@ -61,6 +62,7 @@ module.exports = db => {
        console.error(e);
        res.send(e);
      });
+    // console.log('hello', req.body.title)
    });
 
 
