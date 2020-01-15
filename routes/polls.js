@@ -52,13 +52,12 @@ module.exports = db => {
    //SUCCESS MESSAGE
 
    //THIS ROUTE IS DONE, DO NOT CHANGE UNLESS WE DECIDE ON NEW FUNCTIONALITY
-   router.post("/new", function(req,res) {
+   router.post("/polls", function(req,res) {
     // const Id = req.session.Id;
-    console.log('request body', req.body);
+    // console.log('request body', req.body);
     queries(db)
      .addPoll(req.body)
      .then(poll => {
-       res.send(poll);
        res.redirect("/success");
      })
      .catch(e => {
@@ -86,43 +85,31 @@ module.exports = db => {
     res.redirect("/polls");
   });
 
-  router.post("/polls", (req, res) => {
-    //const userId = req.session.userId;
+  // router.post("/polls", (req, res) => {
 
-    // const { polls_title, polls_description, polls_creator_id, poll_id, options1, options2, options3, options4 } = req.body;
-    // could do some manual validation here if you wanted
+  //   const object = {
+  //     polls_title: 'title',
+  //     polls_description: 'dscription',
+  //     polls_creator_id: 1,
+  //     option1: '1',
+  //     option2: '2',
+  //     option3: '3',
+  //     option4: '4'
+  //   }
 
-    // const polls_title = 'title'
-    // const polls_description = 'desc'
-    // const polls_creator_id = 1;
-    // const option1 = '1'
-    // const option2 = '2'
-    // const option3 = '3'
-    // const option4 = '4'
-
-    const object = {
-      polls_title: 'title',
-      polls_description: 'dscription',
-      polls_creator_id: 1,
-      option1: '1',
-      option2: '2',
-      option3: '3',
-      option4: '4'
-    }
-
-    console.log(req.body);
-    queries(db)
-      .addPoll(req.body)
-      .then(poll => {
-        console.log("creating poll seems okay", poll);
-       // res.send(poll);
-        res.render("success");
-      })
-      .catch(e => {
-        console.error('error', e);
-        res.status(500).send(e);
-      });
-  });
+  //   console.log(req.body);
+  //   queries(db)
+  //     .addPoll(req.body)
+  //     .then(poll => {
+  //       console.log("creating poll seems okay", poll);
+  //      // res.send(poll);
+  //       res.render("success");
+  //     })
+  //     .catch(e => {
+  //       console.error('error', e);
+  //       res.status(500).send(e);
+  //     });
+  // });
 
   //SEE THE POLL
   //Where votes happen
