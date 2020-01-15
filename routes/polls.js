@@ -15,18 +15,18 @@ const queries = require('../lib/database.js')
 
 module.exports = db => {
 
-  // router.get("/user1", (req, res) => {
-  //   let query = `SELECT * FROM polls WHERE creator_id=1`;
-  //   console.log(query);
-  //   db.query(query)
-  //     .then(data => {
-  //       const polls = data.rows;
-  //       res.json({ polls });
-  //     })
-  //     .catch(err => {
-  //       res.status(500).json({ error: err.message });
-  //     });
-  // });
+  router.get("/user1", (req, res) => {
+    let query = `SELECT * FROM polls WHERE creator_id=1`;
+    console.log(query);
+    db.query(query)
+      .then(data => {
+        const polls = data.rows;
+        res.json({ polls });
+      })
+      .catch(err => {
+        res.status(500).json({ error: err.message });
+      });
+  });
 
   // CREATE THE POLL
 
