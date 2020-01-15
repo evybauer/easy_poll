@@ -72,9 +72,17 @@ module.exports = db => {
   //     // authentication of the user
   // });
 
-  // router.post("/welcome", (req, res) => {
-  //   res.redirect("/polls");
-  // });
+  router.post("/new_poll", (req, res) => {
+    res.redirect("/polls");
+  });
+
+  router.post("/vote_here", (req, res) => {
+    res.redirect("/polls");
+  });
+
+  router.post("/view_results", (req, res) => {
+    res.redirect("/polls");
+  });
 
   router.post("/polls", (req, res) => {
     //const userId = req.session.userId;

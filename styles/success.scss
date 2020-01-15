@@ -9,13 +9,9 @@ div.jumbotron.jumbotron-fluid {
   color: #45A29E;
   font-family: 'Electrolize', sans-serif;
 }
-
-form{
-  max-width: 500px;
-  background-color: rgba(0, 0, 0, 0.3);
-  margin: 0% 10%;
-  padding: 25px;
-  color: #fefefe;
-  font-family: 'Jura', sans-serif;
+div.action_buttons {
+  margin:50 auto;
+  display:block;
+  width: 40%;
 }
 
