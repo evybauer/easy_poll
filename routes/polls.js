@@ -53,12 +53,11 @@ module.exports = db => {
 
    //THIS ROUTE IS DONE, DO NOT CHANGE UNLESS WE DECIDE ON NEW FUNCTIONALITY
    router.post("/polls", function(req,res) {
-    // const Id = req.session.Id;
-    // console.log('request body', req.body);
     queries(db)
      .addPoll(req.body)
      .then(poll => {
-       res.redirect("/success");
+       res.render("success");
+       return;
      })
      .catch(e => {
        console.error(e);
