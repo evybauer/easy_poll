@@ -14,7 +14,7 @@ const router = express.Router();
 const queries = require('../lib/database.js')
 
 module.exports = db => {
-  
+
   router.get("/user1", (req, res) => {
     let query = `SELECT * FROM polls WHERE creator_id=1`;
     console.log(query);
