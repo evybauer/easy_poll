@@ -72,6 +72,10 @@ module.exports = db => {
   //     // authentication of the user
   // });
 
+  // router.post("/welcome", (req, res) => {
+  //   res.redirect("/polls");
+  // });
+
   router.post("/polls", (req, res) => {
     //const userId = req.session.userId;
 
@@ -102,7 +106,7 @@ module.exports = db => {
       .then(poll => {
         console.log("creating poll seems okay", poll);
        // res.send(poll);
-        res.redirect("/success");
+        res.render("success");
       })
       .catch(e => {
         console.error('error', e);
