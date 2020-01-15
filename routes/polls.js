@@ -39,12 +39,14 @@ module.exports = db => {
       .then(data => {
         const polls = data.rows;
         console.log("polls", {polls} );
-        res.render("polls",polls);
+        res.render("polls", {polls});
       })
       .catch(err => {
         res.status(500).json({ error: err.message });
       });
   });
+
+
 
 
    //SUCCESS MESSAGE
@@ -72,6 +74,55 @@ module.exports = db => {
   //     // authentication of the user
   // });
 
+  router.post("/new_poll", (req, res) => {
+    res.redirect("/polls");
+  });
+
+  router.post("/vote_here", (req, res) => {
+    res.redirect("/polls");
+  });
+
+  router.post("/view_results", (req, res) => {
+    res.redirect("/polls");
+  });
+
+  router.post("/polls", (req, res) => {
+    //const userId = req.session.userId;
+
+    // const { polls_title, polls_description, polls_creator_id, poll_id, options1, options2, options3, options4 } = req.body;
+    // could do some manual validation here if you wanted
+
+    // const polls_title = 'title'
+    // const polls_description = 'desc'
+    // const polls_creator_id = 1;
+    // const option1 = '1'
+    // const option2 = '2'
+    // const option3 = '3'
+    // const option4 = '4'
+
+    const object = {
+      polls_title: 'title',
+      polls_description: 'dscription',
+      polls_creator_id: 1,
+      option1: '1',
+      option2: '2',
+      option3: '3',
+      option4: '4'
+    }
+
+    console.log(req.body);
+    queries(db)
+      .addPoll(req.body)
+      .then(poll => {
+        console.log("creating poll seems okay", poll);
+       // res.send(poll);
+        res.render("success");
+      })
+      .catch(e => {
+        console.error('error', e);
+        res.status(500).send(e);
+      });
+  });
 
   //SEE THE POLL
   //Where votes happen

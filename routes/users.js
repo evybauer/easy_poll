@@ -44,6 +44,7 @@ module.exports = (dbHelpers) => {
 
     //SUCCESS MESSAGE CREATOR
     router.get("/success", (req, res) => {
+      req.session = null;
       res.redirect("/success");
     });
 
