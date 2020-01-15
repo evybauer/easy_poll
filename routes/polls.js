@@ -14,8 +14,7 @@ const router = express.Router();
 const queries = require('../lib/database.js')
 
 module.exports = db => {
-
-
+  
   router.get("/user1", (req, res) => {
     let query = `SELECT * FROM polls WHERE creator_id=1`;
     console.log(query);
@@ -30,6 +29,40 @@ module.exports = db => {
   });
 
   // CREATE THE POLL
+
+
+  router.get("/polls", (req, res) => {
+    let query = `SELECT * FROM polls
+    WHERE creator_id = 1`;
+    console.log(query);
+    db.query(query)
+      .then(data => {
+        const polls = data.rows;
+        console.log("polls", {polls} );
+        res.render("polls",polls);
+      })
+      .catch(err => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+
+   //SUCCESS MESSAGE
+
+   router.post("/polls",(req,res) => {
+    // const Id = req.session.Id;
+    console.log('request body', req.body);
+     db.addPoll({...req.body})
+     .then(poll => {
+       res.send(poll);
+       res.redirect("/success");
+     })
+     .catch(e => {
+       console.error(e);
+       res.send(e);
+     });
+   });
+
 
   // router.get("/polls", (req, res) => {
   //     db.query(...)

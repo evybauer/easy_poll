@@ -19,17 +19,17 @@
   <%- include('./partials/header'); %>
 
   <body>
-      <form>
+      <form action="api/users/votes" method="POST">
           <h2>Poll to vote</h2>
 
             <div class="form-group">
-            <h4>Question?</h4>
+            <h4><%- polls.title %></h4>
             <!--Add ejs to receive the info from the databse-->
             </div>
 
             <div class="form-group">
             <h4>Description</h4>
-            <label> This is the description of the question</label>
+            <label> <%- polls.description %></label>
             <!--Add ejs to receive the info from the databse-->
             </div>
 
@@ -40,19 +40,19 @@
             <div class="form-group">
 
               <div class="btn-group" role="group" aria-label="Third group">
-                <button type="button" class="btn btn-secondary">Option 1 <br> <label> Description of option</label> </button>
+                <button type="button" class="btn btn-secondary"><%- options.title %> <br> <label><%- options.description %></label> </button>
               </div><br><br>
 
               <div class="btn-group" role="group" aria-label="Third group">
-                <button type="button" class="btn btn-secondary">Option 2<br> <label> Description of option</label> </button>
+                <button type="button" class="btn btn-secondary"><%- options.title %><br> <label><%- options.description %></label> </button>
               </div><br><br>
 
               <div class="btn-group" role="group" aria-label="Third group">
-                <button type="button" class="btn btn-secondary">Option 3 <br> <label> Description of option</label></button>
+                <button type="button" class="btn btn-secondary"><%- options.title %><br> <label><%- options.description %></label></button>
               </div><br><br>
 
               <div class="btn-group" role="group" aria-label="Third group">
-                  <button type="button" class="btn btn-secondary">Option 4 <br> <label> Description of option</label></button>
+                  <button type="button" class="btn btn-secondary"><%- options.title %><br> <label><%- options.description %></label></button>
                 </div><br><br>
 
 

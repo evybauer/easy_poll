@@ -21,7 +21,8 @@
 
   <body>
 
-    <form>
+    <form action="/polls" method="POST">
+
       <div class="form-group">
           <label for="firstName">Name: </label>
           <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
@@ -32,29 +33,37 @@
           <input type="email" class="form-control" id="email" placeholder="">
         </div>
 
-        <div class="form-group">
-          <input type="email" class="form-control" id="email" placeholder="">
-        </div>
 
         <div class="form-group">
-          <label for="exampleFormControlSelect1">Example select</label><br>
+            <label for="title">Title: <span class="text-muted"></span></label>
+            <input type="text" class="form-control" id="title" placeholder="What do you want to poll?">
+          </div>
+
+        <div class="form-group">
+          <label for="description">Description</label><br>
           <textarea>
-
 
           </textarea>
         </div>
 
         <div class="form-group">
 
-          <label for="exampleFormControlSelect2">Example multiple select</label>
+          <label for="exampleFormControlSelect2">Options</label>
           <input type="text" class="form-control" id="option1" placeholder="Option 1"><br><br>
           <input type="text" class="form-control" id="option2" placeholder="Option 2"><br><br>
           <input type="text" class="form-control" id="option3" placeholder="Option 3"><br><br>
           <input type="text" class="form-control" id="option4" placeholder="Option 4"><br><br>
+
         </div>
+
+        <div class ="add-option-div">
+            <p class="err" id="missing-option">Please fill out all of the options</p>
+            <button type="button" class="add-option btn btn-outline-danger">Add another option</button>
+          </div>
 
         <div class="form-group">
           <button class="btn btn-outline-success btn-lg btn-block" type="submit">Create Form</button>
+
         </div>
       </form>
   </body>

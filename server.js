@@ -51,6 +51,7 @@ app.use("/api/widgets", widgetsRoutes(db));
 // app.use("/api/login", loginRoutes(db));
 
 app.use("/api/polls", pollsRoutes(db));
+app.use("/", pollsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 
