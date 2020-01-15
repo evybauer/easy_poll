@@ -14,19 +14,19 @@ const router = express.Router();
 const queries = require('../lib/database.js')
 
 module.exports = db => {
-  
-  router.get("/user1", (req, res) => {
-    let query = `SELECT * FROM polls WHERE creator_id=1`;
-    console.log(query);
-    db.query(query)
-      .then(data => {
-        const polls = data.rows;
-        res.json({ polls });
-      })
-      .catch(err => {
-        res.status(500).json({ error: err.message });
-      });
-  });
+
+  // router.get("/user1", (req, res) => {
+  //   let query = `SELECT * FROM polls WHERE creator_id=1`;
+  //   console.log(query);
+  //   db.query(query)
+  //     .then(data => {
+  //       const polls = data.rows;
+  //       res.json({ polls });
+  //     })
+  //     .catch(err => {
+  //       res.status(500).json({ error: err.message });
+  //     });
+  // });
 
   // CREATE THE POLL
 
@@ -39,7 +39,7 @@ module.exports = db => {
       .then(data => {
         const polls = data.rows;
         console.log("polls", {polls} );
-        res.render("polls",polls);
+        res.render("polls", {polls});
       })
       .catch(err => {
         res.status(500).json({ error: err.message });
@@ -49,19 +49,20 @@ module.exports = db => {
 
    //SUCCESS MESSAGE
 
-   router.post("/polls",(req,res) => {
-    // const Id = req.session.Id;
-    console.log('request body', req.body);
-     db.addPoll({...req.body})
-     .then(poll => {
-       res.send(poll);
-       res.redirect("/success");
-     })
-     .catch(e => {
-       console.error(e);
-       res.send(e);
-     });
-   });
+  //  router.post("/polls",(req,res) => {
+  //   // const Id = req.session.Id;
+  //   console.log('request body', req.body);
+  //    queries(db)
+  //    .addPoll({...req.body})
+  //    .then(poll => {
+  //      res.send(poll);
+  //      res.redirect("/success");
+  //    })
+  //    .catch(e => {
+  //      console.error(e);
+  //      res.send(e);3
+  //    });
+  //  });
 
 
   // router.get("/polls", (req, res) => {
@@ -69,23 +70,33 @@ module.exports = db => {
   //     // authentication of the user
   // });
 
-  router.post("/secret", (req, res) => {
+  router.post("/polls", (req, res) => {
     //const userId = req.session.userId;
 
     // const { polls_title, polls_description, polls_creator_id, poll_id, options1, options2, options3, options4 } = req.body;
     // could do some manual validation here if you wanted
 
-    const polls_title = 'title'
-    const polls_description = 'desc'
-    const polls_creator_id = 1;
-    const option1 = '1'
-    const option2 = '2'
-    const option3 = '3'
-    const option4 = '4'
+    // const polls_title = 'title'
+    // const polls_description = 'desc'
+    // const polls_creator_id = 1;
+    // const option1 = '1'
+    // const option2 = '2'
+    // const option3 = '3'
+    // const option4 = '4'
 
+    const object = {
+      polls_title: 'title',
+      polls_description: 'dscription',
+      polls_creator_id: 1,
+      option1: '1',
+      option2: '2',
+      option3: '3',
+      option4: '4'
+    }
 
+    console.log(req.body);
     queries(db)
-      .addPoll({ polls_title, polls_description, polls_creator_id, option1, option2, option3, option4 })
+      .addPoll(req.body)
       .then(poll => {
         console.log("creating poll seems okay", poll);
         res.send(poll);
