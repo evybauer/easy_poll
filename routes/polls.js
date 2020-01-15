@@ -77,17 +77,17 @@ module.exports = db => {
     // const { polls_title, polls_description, polls_creator_id, poll_id, options1, options2, options3, options4 } = req.body;
     // could do some manual validation here if you wanted
 
-    const polls_title = 'title'
-    const polls_description = 'desc'
-    const polls_creator_id = 1;
-    const option1 = '1'
-    const option2 = '2'
-    const option3 = '3'
-    const option4 = '4'
+    // const polls_title = 'title'
+    // const polls_description = 'desc'
+    // const polls_creator_id = 1;
+    // const option1 = '1'
+    // const option2 = '2'
+    // const option3 = '3'
+    // const option4 = '4'
 
 
     queries(db)
-      .addPoll({ polls_title, polls_description, polls_creator_id, option1, option2, option3, option4 })
+      .addPoll(req.body)
       .then(poll => {
         console.log("creating poll seems okay", poll);
         res.send(poll);
