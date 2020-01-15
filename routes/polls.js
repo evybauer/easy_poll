@@ -49,7 +49,8 @@ module.exports = db => {
 
    //SUCCESS MESSAGE
 
-   router.post("/polls", function(req,res) {
+   //THIS ROUTE IS DONE, DO NOT CHANGE UNLESS WE DECIDE ON NEW FUNCTIONALITY
+   router.post("/new", function(req,res) {
     // const Id = req.session.Id;
     console.log('request body', req.body);
     queries(db)
@@ -71,38 +72,11 @@ module.exports = db => {
   //     // authentication of the user
   // });
 
-  router.post("/secret", (req, res) => {
-    //const userId = req.session.userId;
-
-    // const { polls_title, polls_description, polls_creator_id, poll_id, options1, options2, options3, options4 } = req.body;
-    // could do some manual validation here if you wanted
-
-    // const polls_title = 'title'
-    // const polls_description = 'desc'
-    // const polls_creator_id = 1;
-    // const option1 = '1'
-    // const option2 = '2'
-    // const option3 = '3'
-    // const option4 = '4'
-
-
-    queries(db)
-      .addPoll(req.body)
-      .then(poll => {
-        console.log("creating poll seems okay", poll);
-        res.send(poll);
-      })
-      .catch(e => {
-        console.error('error', e);
-        res.status(500).send(e);
-      });
-  });
 
   //SEE THE POLL
   //Where votes happen
   router.get("/shortid", (req, res) => {
     let shortid = 1;
-
     db.query(
       `
        SELECT options.choice, options.description, options.vote_total, (SELECT polls.description AS question
@@ -124,6 +98,7 @@ module.exports = db => {
   });
 
   // SEE THE RESULTS
+  //THIS ROUTE IS WORKING, USING HARD CODED DATA
   router.get("/results", (req, res) => {
     let shortid = 1;
     console.log('here');
