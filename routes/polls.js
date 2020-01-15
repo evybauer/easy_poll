@@ -47,6 +47,8 @@ module.exports = db => {
   });
 
 
+
+
    //SUCCESS MESSAGE
 
   //  router.post("/polls",(req,res) => {
@@ -99,7 +101,8 @@ module.exports = db => {
       .addPoll(req.body)
       .then(poll => {
         console.log("creating poll seems okay", poll);
-        res.send(poll);
+       // res.send(poll);
+        res.redirect("/success");
       })
       .catch(e => {
         console.error('error', e);
