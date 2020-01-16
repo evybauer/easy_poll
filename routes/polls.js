@@ -52,6 +52,7 @@ module.exports = db => {
    //SUCCESS MESSAGE
 
    //THIS ROUTE IS DONE, DO NOT CHANGE UNLESS WE DECIDE ON NEW FUNCTIONALITY
+   //adding a new poll to DB
    router.post("/polls", function(req,res) {
     queries(db)
      .addPoll(req.body)
@@ -86,6 +87,51 @@ module.exports = db => {
   router.post("/view_results", (req, res) => {
     res.redirect("/polls");
   });
+
+  /*
+  //SEE THE POLL
+  //Where votes happen, this route is done
+  router.get("/shortid", (req, res) => {
+    let shortid = 2;
+
+    db.query(
+      `
+      SELECT polls.title, polls.description AS polls_description, options.choice, options.description FROM polls
+      JOIN options ON poll_id=polls.id
+      WHERE poll_id=2
+      `
+    )
+      .then(data => {
+        const params = data.rows;
+        console.log(params);
+        //res.json({ polls });
+
+        res.render("options",{ params });
+      })
+      .catch(err => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+
+//This route is unused right now?
+
+  router.post("/shortid", (req, res) => {
+    console.log("countVotes",req.body);
+    queries(db)
+
+    .countVotes()
+
+    .then(poll => {
+      console.log('data you asked for', poll)
+      res.render("thank_you");
+    })
+    .catch(e => {
+      console.error(e);
+      res.send(e)
+    });
+  });
+/*
 
 
   // SEE THE RESULTS
