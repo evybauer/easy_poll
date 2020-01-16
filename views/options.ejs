@@ -22,11 +22,11 @@
     <script type="text/javascript" src="/scripts/app.js"></script>
     <script>
 
-Sortable.create(list, {
-	multiDrag: true, // Enable multi-drag
-	selectedClass: 'selected', // The class applied to the selected items
-	animation: 150
-});
+// Sortable.create(list, {
+// 	multiDrag: true, // Enable multi-drag
+// 	selectedClass: 'selected', // The class applied to the selected items
+// 	animation: 150
+// });
   </script>
 
   </head>
@@ -35,11 +35,11 @@ Sortable.create(list, {
   <body>
       <form action="/shortid" method="POST">
           <div class="form-group">
-              <h2> Question: <%= `${polls.question}` %></h2>
+              <h2 class="poll-page-text"> Question: <%= params[0].title %></h2>
             </div>
 
             <div class="form-group">
-                <h3> Description: <%= `${polls.description}` %></h3>
+                <h3 class="poll-page-text"> Description: <%= params[0].polls_description %></h3>
               </div><br><br>
 
             <div class="form-group">
@@ -47,7 +47,7 @@ Sortable.create(list, {
             </div>
 
             <ul id="list" class="list-group">
-                <% for (const options of polls) { %>
+                <% for (const options of params) { %>
                 <li name="<%= options.id %>" class="list-group-item active"><span class="glyphicon glyphicon-move my-handle" aria-hidden="true"></span><%= `${options.choice}`%><br><%= `${options.description}`%></li><br>
               <% } %>
             </ul>
