@@ -50,19 +50,10 @@ module.exports = (dbHelpers) => {
 
     //THANK YOU MESSAGE VOTER
     router.get("/thank_you", (req, res) => {
+      req.session = null;
       res.redirect("/thank_you");
     });
 
-  // router.post("/options", (req, res) => {
-  //   dbHelpers.countVotes()
-  //   .then(res => {
-  //     res.redirect("/results");
-  //   })
-  //   .catch(e => {
-  //     console.error(e);
-  //     res.send(e)
-  //   });
-  // });
 
   //     router.post("/options", (req, res) => {
   //       database
