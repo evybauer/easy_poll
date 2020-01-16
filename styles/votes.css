@@ -1,0 +1,25 @@
+
+form{
+  max-width: 500px;
+  background-color: rgba(0, 0, 0, 0.3);
+  margin: 0% 10%;
+  padding: 25px;
+  color: #fefefe;
+  font-family: 'Jura', sans-serif;
+}
+
+body {
+  padding: 30px;
+}
+ul {
+  list-style: none;
+}
+
+.my-handle {
+  cursor: move;
+  cursor: -webkit-grabbing;
+}
+
+
+
+
