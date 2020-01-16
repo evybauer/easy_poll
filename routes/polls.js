@@ -59,7 +59,7 @@ module.exports = db => {
        console.log('This is poll', poll)
       //  console.log('URL', poll.submissionURL);
        //pass params to succes ejs with the poll id
-       res.render("success", {pollid: poll[0].poll_id}); // WE MUST DINAMICALY REPLACE THE POLL ID SO IT REDIRECTS TO THE CORRECT OPTIONS PAGE
+       res.render("success", {pollid: poll.poll_id}); // WE MUST DINAMICALY REPLACE THE POLL ID SO IT REDIRECTS TO THE CORRECT OPTIONS PAGE
        return;
      })
      .catch(e => {
