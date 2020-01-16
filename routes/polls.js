@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const mailgun = require("../lib/mailgun");
 // router.post("/", (req, res) => {
 //   pollsDatabase = {
 //     title: req.body. //
@@ -56,7 +56,7 @@ module.exports = db => {
     queries(db)
      .addPoll(req.body)
      .then(poll => {
-       console.log(poll);
+       console.log(poll.submissionURL);
        res.render("success");
        return;
      })
