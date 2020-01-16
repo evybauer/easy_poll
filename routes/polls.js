@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const mailgun = require("../lib/mailgun");
 // router.post("/", (req, res) => {
 //   pollsDatabase = {
 //     title: req.body. //
@@ -56,6 +56,7 @@ module.exports = db => {
     queries(db)
      .addPoll(req.body)
      .then(poll => {
+       console.log('URL', poll.submissionURL);
        res.render("success");
        return;
      })
@@ -87,23 +88,21 @@ module.exports = db => {
   //SEE THE POLL
   //Where votes happen
   router.get("/shortid", (req, res) => {
-    let shortid = 1;
+    let shortid = 2;
+
     db.query(
       `
-       SELECT options.choice, options.description, options.vote_total, (SELECT polls.description AS question
-         FROM polls
-         WHERE polls.id=${shortid}
-         ORDER BY polls.title)
-       FROM options
-       WHERE poll_id=${shortid};
+      SELECT polls.title, polls.description AS polls_description, options.choice, options.description FROM polls
+      JOIN options ON poll_id=polls.id
+      WHERE poll_id=2
       `
     )
       .then(data => {
-        const polls = data.rows;
-        console.log(polls);
+        const params = data.rows;
+        console.log(params);
         //res.json({ polls });
 
-        res.render("options",{ polls });
+        res.render("options",{ params });
       })
       .catch(err => {
         res.status(500).json({ error: err.message });
@@ -147,6 +146,7 @@ module.exports = db => {
   //THIS ROUTE IS WORKING, USING HARD CODED DATA
   router.get("/results", (req, res) => {
     let shortid = 1;
+
     console.log('here');
     db.query(
       `
