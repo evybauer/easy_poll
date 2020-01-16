@@ -29,9 +29,7 @@
            <button type="submit" class="btn btn-outline-primary">Create Another Poll</button>
           </form>
         <br>
-          <form action="/vote_here" method="POST">
-            <button type="submit" class="btn btn-outline-warning">Vote Here</button>
-          </form>
+          <a class="btn btn-outline-primary" href=<%= `/polls/${pollid}`%>  > Vote Here For (poll name) </a>
           <br>
           <form action="/view_results" method="POST">
             <button type="submit" class="btn btn-outline-success">View The Results</button>

@@ -9,3 +9,9 @@ $(() => {
   });;
 });
 
+$(document).ready(() => {
+  $( "#sortable" ).sortable();
+  $( "#sortable" ).disableSelection();
+
+
+})
