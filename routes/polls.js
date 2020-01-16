@@ -85,6 +85,12 @@ module.exports = db => {
     res.redirect("/polls");
   });
 
+  // HOME
+  // Redirects users to the home page where they can see their URLs
+  router.post("/view_home", (req, res) => {
+    res.render("home");
+  });
+
   //SEE THE POLL
   //Where votes happen
   router.get("/shortid", (req, res) => {
@@ -173,3 +179,5 @@ module.exports = db => {
   };
 // The creator will be loged in and will be able to see previous polls
 // Click on create and be redirected to the /polls/new where will fill out a new poll
+
+
