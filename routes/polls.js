@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const mailgun = require("../lib/mailgun");
 // router.post("/", (req, res) => {
 //   pollsDatabase = {
 //     title: req.body. //
@@ -56,6 +56,7 @@ module.exports = db => {
     queries(db)
      .addPoll(req.body)
      .then(poll => {
+       console.log('URL', poll.submissionURL);
        res.render("success");
        return;
      })
@@ -147,6 +148,7 @@ module.exports = db => {
   //THIS ROUTE IS WORKING, USING HARD CODED DATA
   router.get("/results", (req, res) => {
     let shortid = 1;
+
     console.log('here');
     db.query(
       `
