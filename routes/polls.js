@@ -56,6 +56,7 @@ module.exports = db => {
     queries(db)
      .addPoll(req.body)
      .then(poll => {
+       console.log(poll);
        res.render("success");
        return;
      })
@@ -112,6 +113,7 @@ module.exports = db => {
   //THIS ROUTE IS WORKING, USING HARD CODED DATA
   router.get("/results", (req, res) => {
     let shortid = 1;
+
     console.log('here');
     db.query(
       `
