@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vote here!</title>
+
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/votes.css" type="text/css" />
+
+
+<!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+  <!-- Latest Sortable -->
+  <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Jura&display=swap" rel="stylesheet">
+
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script>
+
+Sortable.create(list, {
+	multiDrag: true, // Enable multi-drag
+	selectedClass: 'selected', // The class applied to the selected items
+	animation: 150
+});
+  </script>
+
+  </head>
+  <%- include('./partials/header'); %>
+
+  <body>
+      <form action="/shortid" method="POST">
+          <div class="form-group">
+              <h2> Question: <%= `${polls.question}` %></h2>
+            </div>
+
+            <div class="form-group">
+                <h3> Description: <%= `${polls.description}` %></h3>
+              </div><br><br>
+
+            <div class="form-group">
+            <h4>Options</h4>
+            </div>
+
+            <ul id="list" class="list-group">
+                <% for (const options of polls) { %>
+                <li name="<%= options.id %>" class="list-group-item active"><span class="glyphicon glyphicon-move my-handle" aria-hidden="true"></span><%= `${options.choice}`%><br><%= `${options.description}`%></li><br>
+              <% } %>
+            </ul>
+
+          <div class="form-group">
+              <button class="btn btn-outline-success btn-lg btn-block" type="submit">Vote!</button>
+            </div>
+
+          </form>
+  </body>
+</html>

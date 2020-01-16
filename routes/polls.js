@@ -102,12 +102,47 @@ module.exports = db => {
       .then(data => {
         const polls = data.rows;
         console.log(polls);
-        res.json({ polls });
+        //res.json({ polls });
+
+        res.render("options",{ polls });
       })
       .catch(err => {
         res.status(500).json({ error: err.message });
       });
   });
+
+  // router.post("/shortid", function(req,res) {
+  //   queries(db)
+  //    .then(poll => {
+  //      res.render("thank_you");
+  //      return;
+  //    })
+  //    .catch(e => {
+  //      console.error(e);
+  //      res.send(e);
+  //    });
+  //   // console.log('hello', req.body.title)
+  //  });
+
+
+
+  router.post("/shortid", (req, res) => {
+    console.log("countVotes",req.body);
+    queries(db)
+
+    .countVotes()
+
+    .then(poll => {
+      console.log('data you asked for', poll)
+      res.render("thank_you");
+    })
+    .catch(e => {
+      console.error(e);
+      res.send(e)
+    });
+  });
+
+
 
   // SEE THE RESULTS
   //THIS ROUTE IS WORKING, USING HARD CODED DATA
