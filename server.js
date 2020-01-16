@@ -51,7 +51,7 @@ app.use("/api/users", usersRoutes(dbHelpers));
 app.use("/api/widgets", widgetsRoutes(db));
 // app.use("/api/login", loginRoutes(db));
 
-app.use("/api/polls", pollsRoutes(db));
+// app.use("/api/polls", pollsRoutes(db));
 app.use("/", pollsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
@@ -60,8 +60,8 @@ app.use("/", pollsRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  // res.render("login");
   res.render("login");
+  // res.render("options");
 });
 
 app.listen(PORT, () => {

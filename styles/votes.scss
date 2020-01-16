@@ -9,15 +9,14 @@ form{
 }
 
 body {
-  padding: 20px;
+  padding: 30px;
 }
 
-.list-group-item {
+
+ul {
+  list-style: none;
+}
+.my-handle {
   cursor: move;
   cursor: -webkit-grabbing;
 }
-
-.poll-page-text {
-  color: #3e8885;
-}
-
