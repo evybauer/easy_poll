@@ -61,7 +61,7 @@ app.use("/", pollsRoutes(db));
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
   // res.render("login");
-  res.render("login");
+  res.render("home");
 });
 
 app.listen(PORT, () => {
