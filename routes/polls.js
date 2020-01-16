@@ -52,6 +52,7 @@ module.exports = db => {
    //SUCCESS MESSAGE
 
    //THIS ROUTE IS DONE, DO NOT CHANGE UNLESS WE DECIDE ON NEW FUNCTIONALITY
+   //adding a new poll to DB
    router.post("/polls", function(req,res) {
     queries(db)
      .addPoll(req.body)
@@ -86,7 +87,7 @@ module.exports = db => {
   });
 
   //SEE THE POLL
-  //Where votes happen
+  //Where votes happen, this route is done
   router.get("/shortid", (req, res) => {
     let shortid = 2;
 
@@ -109,20 +110,8 @@ module.exports = db => {
       });
   });
 
-  // router.post("/shortid", function(req,res) {
-  //   queries(db)
-  //    .then(poll => {
-  //      res.render("thank_you");
-  //      return;
-  //    })
-  //    .catch(e => {
-  //      console.error(e);
-  //      res.send(e);
-  //    });
-  //   // console.log('hello', req.body.title)
-  //  });
 
-
+//This route is unused right now?
 
   router.post("/shortid", (req, res) => {
     console.log("countVotes",req.body);
