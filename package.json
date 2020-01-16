@@ -23,12 +23,8 @@
     "pg-native": "^3.0.0"
   },
   "devDependencies": {
-<<<<<<< HEAD
     "mailgun-js": "^0.22.0",
-    "nodemon": "^1.19.4"
-=======
     "nodemon": "^1.19.4",
     "sortablejs": "^1.10.2"
->>>>>>> master
   }
 }
