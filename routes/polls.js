@@ -88,7 +88,13 @@ module.exports = db => {
     res.redirect("/polls");
   });
 
-  /*
+/*
+  // HOME
+  // Redirects users to the home page where they can see their URLs
+  router.post("/view_home", (req, res) => {
+    res.render("home");
+  });
+
   //SEE THE POLL
   //Where votes happen, this route is done
   router.get("/shortid", (req, res) => {
@@ -112,7 +118,9 @@ module.exports = db => {
         res.status(500).json({ error: err.message });
       });
   });
+*/
 
+/*
 
 //This route is unused right now?
 
@@ -131,7 +139,7 @@ module.exports = db => {
       res.send(e)
     });
   });
-/*
+*/
 
 
   // SEE THE RESULTS
@@ -218,4 +226,7 @@ module.exports = db => {
     // Click on create and be redirected to the /polls/new where will fill out a new poll
     return router;
   };
+// The creator will be loged in and will be able to see previous polls
+// Click on create and be redirected to the /polls/new where will fill out a new poll
+
 
