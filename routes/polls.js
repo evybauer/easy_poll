@@ -56,7 +56,7 @@ module.exports = db => {
     queries(db)
      .addPoll(req.body)
      .then(poll => {
-       console.log(poll.submissionURL);
+       console.log('URL', poll.submissionURL);
        res.render("success");
        return;
      })
