@@ -159,11 +159,11 @@ module.exports = db => {
         `
     )
       .then(data => {
-        const widgets = data.rows;
-        console.log("results data", widgets);
+        const results = data.rows;
+        console.log("results data", results[0].question);
 
         // res.json({ widgets });
-        res.render("results", { widgets });
+        res.render("results", { results });
       })
       .catch(err => {
         res.status(500).json({ error: err.message });
