@@ -55,10 +55,8 @@ module.exports = db => {
       .addPoll(req.body)
       .then(poll => {
         //pass params to succes ejs with the poll id
-        res.render("success", {
-          pollid: poll.poll_id,
-          pollname: poll.params.title
-        }); // WE MUST DINAMICALY REPLACE THE POLL ID SO IT REDIRECTS TO THE CORRECT OPTIONS PAGE
+        console.log(poll);
+        res.render("results", {poll}); // WE MUST DINAMICALY REPLACE THE POLL ID SO IT REDIRECTS TO THE CORRECT OPTIONS PAGE
 
         return;
       })
@@ -84,6 +82,7 @@ module.exports = db => {
   });
 
   router.post("/view_results", (req, res) => {
+    console.log('poll id', poll.poll_id);
     res.redirect("/results");
   });
 
@@ -147,16 +146,14 @@ module.exports = db => {
   //THIS ROUTE IS WORKING, USING HARD CODED DATA
   router.get("/results", (req, res) => {
 
-    db.query(
-      `
-      SELECT options.choice, options.description, options.vote_total, (SELECT polls.description AS question
-        FROM polls
-        WHERE polls.id=1
-        ORDER BY polls.title)
-        FROM options
-        WHERE poll_id=1;
-        `
-    )
+    let queryString = `SELECT options.choice, options.description, options.vote_total, (SELECT polls.description AS question
+      FROM polls
+      WHERE polls.id=$1
+      ORDER BY polls.title)
+      FROM options
+      WHERE poll_id=$1;`
+
+    db.query(queryString, [2])
       .then(data => {
         const results = data.rows;
         // console.log("results data", results[0].question);
