@@ -54,13 +54,13 @@ module.exports = db => {
    //THIS ROUTE IS DONE, DO NOT CHANGE UNLESS WE DECIDE ON NEW FUNCTIONALITY
    //adding a new poll to DB
    router.post("/polls", function(req,res) {
+    console.log('data going in', req.body);
+
     queries(db)
      .addPoll(req.body)
      .then(poll => {
-       console.log('This is poll', poll)
-      //  console.log('URL', poll.submissionURL);
        //pass params to succes ejs with the poll id
-       res.render("success", {pollid: poll[0].poll_id}); // WE MUST DINAMICALY REPLACE THE POLL ID SO IT REDIRECTS TO THE CORRECT OPTIONS PAGE
+       res.render("success", {pollid: poll.poll_id}); // WE MUST DINAMICALY REPLACE THE POLL ID SO IT REDIRECTS TO THE CORRECT OPTIONS PAGE
        return;
      })
      .catch(e => {
@@ -120,7 +120,7 @@ module.exports = db => {
   });
 */
 
-/*
+
 
 //This route is unused right now?
 
@@ -139,7 +139,7 @@ module.exports = db => {
       res.send(e)
     });
   });
-*/
+
 
 
   // SEE THE RESULTS
@@ -172,19 +172,16 @@ module.exports = db => {
       //SEE THE POLL
       //Where votes happen
       router.get("/polls/:shortid", (req, res) => {
-        let shortid = 2;
-        console.log('what is db', db);
+        // let shortid = 2;
+
         db.query(
           `
-          SELECT polls.title, polls.description AS polls_description, options.choice, options.description FROM polls
-          JOIN options ON poll_id=polls.id
-          WHERE poll_id=$1
-          `,
+          SELECT polls.title, polls.description AS poll_description, options.choice, options.description, options.poll_id FROM polls JOIN options ON polls.id=poll_id WHERE polls.id=$1          `,
           [req.params.shortid]
         )
           .then(data => {
             const params = data.rows;
-            console.log(params);
+            console.log('params', params);
             //res.json({ polls });
             res.render("options",{ params });
           })
@@ -208,7 +205,7 @@ module.exports = db => {
 
 
 
-      router.post("polls/:shortid", (req, res) => {
+      router.post("/polls/:shortid", (req, res) => {
         console.log("countVotes",req.body);
         queries(db)
         .countVotes()
