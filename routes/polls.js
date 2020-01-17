@@ -146,9 +146,7 @@ module.exports = db => {
   // SEE THE RESULTS
   //THIS ROUTE IS WORKING, USING HARD CODED DATA
   router.get("/results", (req, res) => {
-    // let shortid = 1;
 
-    console.log("here");
     db.query(
       `
       SELECT options.choice, options.description, options.vote_total, (SELECT polls.description AS question
@@ -160,9 +158,9 @@ module.exports = db => {
         `
     )
       .then(data => {
-        const widgets = data.rows;
-        // res.json({ widgets });
-        res.render("results", { widgets });
+        const results = data.rows;
+        // console.log("results data", results[0].question);
+        res.render("results", { results });
       })
       .catch(err => {
         res.status(500).json({ error: err.message });
