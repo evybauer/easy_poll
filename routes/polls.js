@@ -60,7 +60,7 @@ module.exports = db => {
        console.log('This is poll', poll)
       //  console.log('URL', poll.submissionURL);
        //pass params to succes ejs with the poll id
-       res.render("success", {pollid: poll.poll_id}); // WE MUST DINAMICALY REPLACE THE POLL ID SO IT REDIRECTS TO THE CORRECT OPTIONS PAGE
+       res.render("success", {pollid: poll.poll_id, pollname:poll.params.title}); // WE MUST DINAMICALY REPLACE THE POLL ID SO IT REDIRECTS TO THE CORRECT OPTIONS PAGE
        return;
      })
      .catch(e => {
@@ -76,6 +76,7 @@ module.exports = db => {
   //     // authentication of the user
   // });
 
+  // SUCCESS PAGE BUTTONS
   router.post("/new_poll", (req, res) => {
     res.redirect("/polls");
   });
@@ -85,15 +86,24 @@ module.exports = db => {
   });
 
   router.post("/view_results", (req, res) => {
-    res.redirect("/polls");
+    res.redirect("/results");
   });
 
-/*
-  // HOME
+    // HOME
   // Redirects users to the home page where they can see their URLs
   router.post("/view_home", (req, res) => {
     res.render("home");
   });
+
+
+// VOTING PAGE VOTE BUTTON
+  router.post("/view_thanks", (req, res) => {
+    res.redirect("/thank_you");
+  });
+
+
+/*
+
 
   //SEE THE POLL
   //Where votes happen, this route is done
@@ -160,7 +170,8 @@ module.exports = db => {
         )
         .then(data => {
           const widgets = data.rows;
-          res.json({ widgets });
+          // res.json({ widgets });
+          res.render("results", { widgets });
         })
         .catch(err => {
           res
@@ -208,7 +219,7 @@ module.exports = db => {
 
 
 
-      router.post("polls/:shortid", (req, res) => {
+      router.post("/polls/:shortid", (req, res) => {
         console.log("countVotes",req.body);
         queries(db)
         .countVotes()

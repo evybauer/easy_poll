@@ -42,7 +42,7 @@ Sortable.create(listWithHandle, {
   <%- include('./partials/header'); %>
 
   <body>
-      <form action="/shortid" method="POST">
+      <form action="/polls/shortid" method="POST">
           <div class="form-group">
               <h2 class="poll-page-text"> Question: <%= params[0].title %></h2>
             </div>
@@ -60,12 +60,13 @@ Sortable.create(listWithHandle, {
                 <li draggable="true" name="<%= options.id %>" class="ui-state-default list-group-item active"><span class=" ui-icon ui-icon-arrowthick-2-n-s glyphicon glyphicon-move my-handle" aria-hidden="true"></span><%= `${options.choice}`%><br><%= `${options.description}`%></li><br>
               <% } %>
             </ul>
+            <button class="btn btn-outline-success btn-lg btn-block" type="submit">Vote!</button>
 
+      </form>
 
-          <div class="form-group">
-              <button class="btn btn-outline-success btn-lg btn-block" type="submit">Vote!</button>
-            </div>
-          </form>
+            <!-- <form action="/thank_you" method="GET"> -->
+              <!-- <button class="btn btn-outline-success btn-lg btn-block" type="submit">Vote!</button> -->
+          <!-- </form> -->
 
 
 

@@ -24,22 +24,24 @@
             <h1 class="display-4">Thank you for creating your poll!</h1>
             <p class="lead">You will recieve an email shortly with the links to vote and check the results of your poll.</p>
           </div>
+          <br>
           <div class="action_buttons">
           <form action="/new_poll" method="POST">
            <button type="submit" class="btn btn-outline-primary">Create Another Poll</button>
           </form>
         <br>
-          <a class="btn btn-outline-primary" href=<%= `/polls/${pollid}`%>  > Vote Here For (poll name) </a>
+          <a class="btn btn-outline-warning" href=<%= `/polls/${pollid}`%>  >Vote Here For this Poll <%= pollname %> </a>
           <br>
           <form action="/view_results" method="POST">
             <button type="submit" class="btn btn-outline-success">View The Results</button>
           </form>
-          </div>
+
           <br>
           <form action="/view_home" method="POST">
-            <button type="submit" class="btn btn-outline-success">My URLs</button>
+            <button type="submit" class="btn btn-outline-info">My URLs</button>
           </form>
           </div>
+        </div>
 
   </body>
 </html>
