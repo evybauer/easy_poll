@@ -7,20 +7,36 @@ nav {
 a.navbar-brand {
   color: #45A29E;
   font-family: 'Electrolize', sans-serif;
+  align-items: flex-end;
+  margin: auto;
 }
 
 a.nav-item.nav-link {
   color: #FFF;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 div.jumbotron.jumbotron-fluid {
   background-color: #080300;
   background-image: url("https://www.transparenttextures.com/patterns/diagmonds.png");
-  color: #FFF
+  color: #FFF;
+
 }
 
 .display-4 {
   font-size: 4.5rem;
-  color: #45A29E;
+  color: #45A29E !important;
   font-family: 'Electrolize', sans-serif;
+}
+
+p.lead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align:center;
 }
