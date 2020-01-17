@@ -55,8 +55,21 @@ module.exports = db => {
       .addPoll(req.body)
       .then(poll => {
         //pass params to succes ejs with the poll id
-        console.log(poll);
-        res.render("results", {poll}); // WE MUST DINAMICALY REPLACE THE POLL ID SO IT REDIRECTS TO THE CORRECT OPTIONS PAGE
+        console.log('object', poll.params)
+
+        let poll_result = {
+          polls_title: poll.params.title,
+          polls_desc: poll.params.description,
+          options: [
+            [poll.params.option1, poll.params.description1],
+            [poll.params.option2, poll.params.description2],
+            [poll.params.option3, poll.params.description3],
+            [poll.params.option4, poll.params.description4]
+          ]
+        }
+        console.log('poll object', poll_result.options[0][0]);
+
+        res.render("results", {poll_result}); // WE MUST DINAMICALY REPLACE THE POLL ID SO IT REDIRECTS TO THE CORRECT OPTIONS PAGE
 
         return;
       })
@@ -64,7 +77,6 @@ module.exports = db => {
         console.error(e);
         res.send(e);
       });
-    // console.log('hello', req.body.title)
   });
 
   // router.get("/polls", (req, res) => {

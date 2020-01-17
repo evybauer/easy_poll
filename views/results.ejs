@@ -22,17 +22,16 @@
           <h2>Results of Poll</h2>
 
             <div class="form-group">
-            <h4>Question: <%= poll.params.title %></h4>
+            <h4>Question: <%= poll_result.polls_title %></h4>
             </div>
-
+            <% for (option of poll_result.options) { %>
             <div class="form-group">
               <div class="progress" style="height: 30px">
-                  <div name="otpion 1" class="progress-bar progress-bar-striped" role="progressbar" style="width: 30%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"> 100% </div>
-                  <span><%= poll.params.option1 %></span>
-
+                  <div name="otpion 1" class="progress-bar progress-bar-striped" role="progressbar" style="width: 30%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"> <%= poll_result.options[option] %></div>
               </div><br>
-
+              <span><%= poll_result.options %></span>
             </div>
+            <% } %>
       </form>
   </body>
   </html>
