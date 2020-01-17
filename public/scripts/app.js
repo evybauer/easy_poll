@@ -10,10 +10,10 @@ $(() => {
 });
 
 $(document).ready(() => {
+  $( "#sortable" ).sortable();
+  $( "#sortable" ).disableSelection();
   particlesJS.load('particles-js', 'assets/particles.json', function() {
     console.log('callback - particles.js config loaded');
   });
-  $( "#sortable" ).sortable();
-  $( "#sortable" ).disableSelection();
-})
+} );
 
