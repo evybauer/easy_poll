@@ -13,50 +13,67 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Jura&display=swap" rel="stylesheet">
 
+
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/polls"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 
   </head>
   <%- include('./partials/header'); %>
 
   <body>
 
-    <form>
+    <form action="/polls" method="POST" class="polls-page">
+
       <div class="form-group">
           <label for="firstName">Name: </label>
-          <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+          <input name="name" type="text" class="form-control" id="firstName" placeholder="" value="" required="">
         </div>
 
         <div class="form-group">
           <label for="email">Email: <span class="text-muted"></span></label>
-          <input type="email" class="form-control" id="email" placeholder="">
+          <input name="email" type="email" class="form-control" id="email" placeholder="">
+        </div>
+
+
+        <div class="form-group">
+            <label for="title">Question: <span class="text-muted"></span></label>
+            <input name="title" type="text" class="form-control" id="title" placeholder="What do you want to poll">
+          </div>
+
+        <div class="form-group">
+          <label for="description" >Description </label><br>
+          <textarea name="polls_description" class="polls_desc_field form-control" style="min-width: 100%" placeholder="What do you want to poll" >
+
+        </input>
         </div>
 
         <div class="form-group">
-          <input type="email" class="form-control" id="email" placeholder="">
+
+          <label for="exampleFormControlSelect2">Options</label>
+          <input name="option1" type="text" class="form-control" id="option1" placeholder="Option 1">
+          <input name="description1" type="text" class="form-control" id="description1" placeholder="Add a description for this option"><br><br>
+
+          <input name="option2" type="text" class="form-control" id="option2" placeholder="Option 2">
+          <input name="description2" type="text" class="form-control" id="description2" placeholder="Add a description for this option"><br><br>
+
+          <input name="option3" type="text" class="form-control" id="option3" placeholder="Option 3">
+          <input name="description3" type="text" class="form-control" id="description3" placeholder="Add a description for this option"><br><br>
+
+          <input name="option4" type="text" class="form-control" id="option4" placeholder="Option 4">
+          <input name="description4" type="text" class="form-control" id="description4" placeholder="Add a description for this option"><br><br>
+
+
         </div>
 
-        <div class="form-group">
-          <label for="exampleFormControlSelect1">Example select</label><br>
-          <textarea>
-
-
-          </textarea>
-        </div>
-
-        <div class="form-group">
-
-          <label for="exampleFormControlSelect2">Example multiple select</label>
-          <input type="text" class="form-control" id="option1" placeholder="Option 1"><br><br>
-          <input type="text" class="form-control" id="option2" placeholder="Option 2"><br><br>
-          <input type="text" class="form-control" id="option3" placeholder="Option 3"><br><br>
-          <input type="text" class="form-control" id="option4" placeholder="Option 4"><br><br>
-        </div>
 
         <div class="form-group">
           <button class="btn btn-outline-success btn-lg btn-block" type="submit">Create Form</button>
         </div>
-      </form>
+
+        </form>
   </body>
 </html>
 

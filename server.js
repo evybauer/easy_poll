@@ -16,13 +16,16 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 
 app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({ extended: true }));
+
 
 app.use("/styles", sass({
   src: __dirname + "/styles",
@@ -47,7 +50,9 @@ const dbHelpers = require('./lib/database')(db);
 app.use("/api/users", usersRoutes(dbHelpers));
 app.use("/api/widgets", widgetsRoutes(db));
 // app.use("/api/login", loginRoutes(db));
-app.use("/api/polls", pollsRoutes(db));
+
+// app.use("/api/polls", pollsRoutes(db));
+app.use("/", pollsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 
@@ -55,6 +60,7 @@ app.use("/api/polls", pollsRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
+  // res.render("login");
   res.render("login");
 });
 

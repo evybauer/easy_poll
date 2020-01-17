@@ -44,24 +44,21 @@ module.exports = (dbHelpers) => {
 
     //SUCCESS MESSAGE CREATOR
     router.get("/success", (req, res) => {
+      req.session = null;
       res.redirect("/success");
     });
 
     //THANK YOU MESSAGE VOTER
     router.get("/thank_you", (req, res) => {
+      req.session = null;
       res.redirect("/thank_you");
     });
 
-  // router.post("/options", (req, res) => {
-  //   dbHelpers.countVotes()
-  //   .then(res => {
-  //     res.redirect("/results");
-  //   })
-  //   .catch(e => {
-  //     console.error(e);
-  //     res.send(e)
-  //   });
-  // });
+    router.get("/home", (req, res) => {
+      req.session = null;
+      res.render("/home");
+    });
+
 
   //     router.post("/options", (req, res) => {
   //       database

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vote here!</title>
+
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/votes.css" type="text/css" />
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Jura&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Electrolize&display=swap" rel="stylesheet">
+
+
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+
+
+    <style>
+        #sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+        #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 100%; }
+        #sortable li span { position: absolute; margin-left: -1.3em; }
+        </style>
+
+<script>
+// List with handle
+Sortable.create(listWithHandle, {
+  handle: '.my-handle',
+  animation: 150
+});
+</script>
+
+
+
+  </head>
+  <%- include('./partials/header'); %>
+
+  <body>
+      <form action="/polls/shortid" method="POST">
+          <div class="form-group">
+              <h2 class="poll-page-text"> Question: <%= params[0].title %></h2>
+            </div>
+
+            <div class="form-group">
+                <h3 class="poll-page-text"> Description: <%= params[0].poll_description %></h3>
+              </div><br><br>
+
+            <div class="form-group">
+            <h4>Options</h4>
+            </div>
+
+            <ul id="sortable" class="list-group">
+                <% for (const options of params) { %>
+                <li draggable="true" name="<%= options.id %>" class="ui-state-default list-group-item active"><span class=" ui-icon ui-icon-arrowthick-2-n-s glyphicon glyphicon-move my-handle" aria-hidden="true"></span><%= `${options.choice}`%><br><%= `${options.description}`%></li><br>
+              <% } %>
+            </ul>
+            <button class="btn btn-outline-success btn-lg btn-block" type="submit">Vote!</button>
+
+      </form>
+
+            <!-- <form action="/thank_you" method="GET"> -->
+              <!-- <button class="btn btn-outline-success btn-lg btn-block" type="submit">Vote!</button> -->
+          <!-- </form> -->
+
+
+
+  </body>
+</html>
+
+
+
+
+
