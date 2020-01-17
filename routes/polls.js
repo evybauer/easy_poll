@@ -146,7 +146,6 @@ module.exports = db => {
   // SEE THE RESULTS
   //THIS ROUTE IS WORKING, USING HARD CODED DATA
   router.get("/results", (req, res) => {
-    // let shortid = 1;
 
     db.query(
       `
@@ -160,9 +159,7 @@ module.exports = db => {
     )
       .then(data => {
         const results = data.rows;
-        console.log("results data", results[0].question);
-
-        // res.json({ widgets });
+        // console.log("results data", results[0].question);
         res.render("results", { results });
       })
       .catch(err => {
