@@ -54,6 +54,11 @@ module.exports = (dbHelpers) => {
       res.redirect("/thank_you");
     });
 
+    router.get("/home", (req, res) => {
+      req.session = null;
+      res.render("/home");
+    });
+
 
   //     router.post("/options", (req, res) => {
   //       database

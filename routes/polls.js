@@ -52,12 +52,15 @@ module.exports = db => {
    //SUCCESS MESSAGE
 
    //THIS ROUTE IS DONE, DO NOT CHANGE UNLESS WE DECIDE ON NEW FUNCTIONALITY
+   //adding a new poll to DB
    router.post("/polls", function(req,res) {
     queries(db)
      .addPoll(req.body)
      .then(poll => {
-       console.log('URL', poll.submissionURL);
-       res.render("success");
+       console.log('This is poll', poll)
+      //  console.log('URL', poll.submissionURL);
+       //pass params to succes ejs with the poll id
+       res.render("success", {pollid: poll[0].poll_id}); // WE MUST DINAMICALY REPLACE THE POLL ID SO IT REDIRECTS TO THE CORRECT OPTIONS PAGE
        return;
      })
      .catch(e => {
@@ -78,15 +81,22 @@ module.exports = db => {
   });
 
   router.post("/vote_here", (req, res) => {
-    res.redirect("/polls");
+    res.redirect("/shortid");
   });
 
   router.post("/view_results", (req, res) => {
     res.redirect("/polls");
   });
 
+/*
+  // HOME
+  // Redirects users to the home page where they can see their URLs
+  router.post("/view_home", (req, res) => {
+    res.render("home");
+  });
+
   //SEE THE POLL
-  //Where votes happen
+  //Where votes happen, this route is done
   router.get("/shortid", (req, res) => {
     let shortid = 2;
 
@@ -108,21 +118,11 @@ module.exports = db => {
         res.status(500).json({ error: err.message });
       });
   });
+*/
 
-  // router.post("/shortid", function(req,res) {
-  //   queries(db)
-  //    .then(poll => {
-  //      res.render("thank_you");
-  //      return;
-  //    })
-  //    .catch(e => {
-  //      console.error(e);
-  //      res.send(e);
-  //    });
-  //   // console.log('hello', req.body.title)
-  //  });
+/*
 
-
+//This route is unused right now?
 
   router.post("/shortid", (req, res) => {
     console.log("countVotes",req.body);
@@ -139,7 +139,7 @@ module.exports = db => {
       res.send(e)
     });
   });
-
+*/
 
 
   // SEE THE RESULTS
@@ -169,7 +169,64 @@ module.exports = db => {
         });
       });
 
+      //SEE THE POLL
+      //Where votes happen
+      router.get("/polls/:shortid", (req, res) => {
+        let shortid = 2;
+        console.log('what is db', db);
+        db.query(
+          `
+          SELECT polls.title, polls.description AS polls_description, options.choice, options.description FROM polls
+          JOIN options ON poll_id=polls.id
+          WHERE poll_id=$1
+          `,
+          [req.params.shortid]
+        )
+          .then(data => {
+            const params = data.rows;
+            console.log(params);
+            //res.json({ polls });
+            res.render("options",{ params });
+          })
+          .catch(err => {
+            res.status(500).json({ error: err.message });
+          });
+      });
+
+      // router.post("/shortid", function(req,res) {
+      //   queries(db)
+      //    .then(poll => {
+      //      res.render("thank_you");
+      //      return;
+      //    })
+      //    .catch(e => {
+      //      console.error(e);
+      //      res.send(e);
+      //    });
+      //   // console.log('hello', req.body.title)
+      //  });
+
+
+
+      router.post("polls/:shortid", (req, res) => {
+        console.log("countVotes",req.body);
+        queries(db)
+        .countVotes()
+        .then(poll => {
+          console.log('data you asked for', poll)
+          res.render("thank_you");
+        })
+        .catch(e => {
+          console.error(e);
+          res.send(e)
+        });
+      });
+
+    // The creator will be loged in and will be able to see previous polls
+    // Click on create and be redirected to the /polls/new where will fill out a new poll
     return router;
   };
 // The creator will be loged in and will be able to see previous polls
 // Click on create and be redirected to the /polls/new where will fill out a new poll
+
+
