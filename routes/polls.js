@@ -11,10 +11,9 @@ const mailgun = require("../lib/mailgun");
 // });
 
 // SEE POLLS CREATED
-const queries = require('../lib/database.js')
+const queries = require("../lib/database.js");
 
 module.exports = db => {
-
   router.get("/user1", (req, res) => {
     let query = `SELECT * FROM polls WHERE creator_id=1`;
     console.log(query);
@@ -30,7 +29,6 @@ module.exports = db => {
 
   // CREATE THE POLL
 
-
   router.get("/polls", (req, res) => {
     let query = `SELECT * FROM polls
     WHERE creator_id = 1`;
@@ -38,39 +36,38 @@ module.exports = db => {
     db.query(query)
       .then(data => {
         const polls = data.rows;
-        console.log("polls", {polls} );
-        res.render("polls", {polls});
+        console.log("polls", { polls });
+        res.render("polls", { polls });
       })
       .catch(err => {
         res.status(500).json({ error: err.message });
       });
   });
 
+  //SUCCESS MESSAGE
 
-
-
-   //SUCCESS MESSAGE
-
-   //THIS ROUTE IS DONE, DO NOT CHANGE UNLESS WE DECIDE ON NEW FUNCTIONALITY
-   //adding a new poll to DB
-   router.post("/polls", function(req,res) {
-    console.log('data going in', req.body);
+  //THIS ROUTE IS DONE, DO NOT CHANGE UNLESS WE DECIDE ON NEW FUNCTIONALITY
+  //adding a new poll to DB
+  router.post("/polls", function(req, res) {
+    console.log("data going in", req.body);
 
     queries(db)
-     .addPoll(req.body)
-     .then(poll => {
-       //pass params to succes ejs with the poll id
-       res.render("success", {pollid: poll.poll_id, pollname:poll.params.title}); // WE MUST DINAMICALY REPLACE THE POLL ID SO IT REDIRECTS TO THE CORRECT OPTIONS PAGE
+      .addPoll(req.body)
+      .then(poll => {
+        //pass params to succes ejs with the poll id
+        res.render("success", {
+          pollid: poll.poll_id,
+          pollname: poll.params.title
+        }); // WE MUST DINAMICALY REPLACE THE POLL ID SO IT REDIRECTS TO THE CORRECT OPTIONS PAGE
 
-       return;
-     })
-     .catch(e => {
-       console.error(e);
-       res.send(e);
-     });
+        return;
+      })
+      .catch(e => {
+        console.error(e);
+        res.send(e);
+      });
     // console.log('hello', req.body.title)
-   });
-
+  });
 
   // router.get("/polls", (req, res) => {
   //     db.query(...)
@@ -90,20 +87,18 @@ module.exports = db => {
     res.redirect("/results");
   });
 
-    // HOME
+  // HOME
   // Redirects users to the home page where they can see their URLs
   router.post("/view_home", (req, res) => {
     res.render("home");
   });
 
-
-// VOTING PAGE VOTE BUTTON
+  // VOTING PAGE VOTE BUTTON
   router.post("/view_thanks", (req, res) => {
     res.redirect("/thank_you");
   });
 
-
-/*
+  /*
 
 
   //SEE THE POLL
@@ -131,34 +126,29 @@ module.exports = db => {
   });
 */
 
-
-
-//This route is unused right now?
+  //This route is unused right now?
 
   router.post("/shortid", (req, res) => {
-    console.log("countVotes",req.body);
+    console.log("countVotes", req.body);
     queries(db)
+      .countVotes()
 
-    .countVotes()
-
-    .then(poll => {
-      console.log('data you asked for', poll)
-      res.render("thank_you");
-    })
-    .catch(e => {
-      console.error(e);
-      res.send(e)
-    });
+      .then(poll => {
+        console.log("data you asked for", poll);
+        res.render("thank_you");
+      })
+      .catch(e => {
+        console.error(e);
+        res.send(e);
+      });
   });
-
-
 
   // SEE THE RESULTS
   //THIS ROUTE IS WORKING, USING HARD CODED DATA
   router.get("/results", (req, res) => {
-    let shortid = 1;
+    // let shortid = 1;
 
-    console.log('here');
+    console.log("here");
     db.query(
       `
       SELECT options.choice, options.description, options.vote_total, (SELECT polls.description AS question
@@ -168,74 +158,68 @@ module.exports = db => {
         FROM options
         WHERE poll_id=1;
         `
-        )
-        .then(data => {
-          const widgets = data.rows;
-          // res.json({ widgets });
-          res.render("results", { widgets });
-        })
-        .catch(err => {
-          res
-          .status(500)
-          .json({ error: err.message });
-        });
+    )
+      .then(data => {
+        const widgets = data.rows;
+        // res.json({ widgets });
+        res.render("results", { widgets });
+      })
+      .catch(err => {
+        res.status(500).json({ error: err.message });
       });
+  });
 
-      //SEE THE POLL
-      //Where votes happen
-      router.get("/polls/:shortid", (req, res) => {
-        // let shortid = 2;
+  //SEE THE POLL
+  //Where votes happen
+  router.get("/polls/:shortid", (req, res) => {
+    // let shortid = 2;
 
-        db.query(
-          `
+    db.query(
+      `
           SELECT polls.title, polls.description AS poll_description, options.choice, options.description, options.poll_id FROM polls JOIN options ON polls.id=poll_id WHERE polls.id=$1          `,
-          [req.params.shortid]
-        )
-          .then(data => {
-            const params = data.rows;
-            console.log('params', params);
-            //res.json({ polls });
-            res.render("options",{ params });
-          })
-          .catch(err => {
-            res.status(500).json({ error: err.message });
-          });
+      [req.params.shortid]
+    )
+      .then(data => {
+        const params = data.rows;
+        console.log("params", params);
+        //res.json({ polls });
+        res.render("options", { params });
+      })
+      .catch(err => {
+        res.status(500).json({ error: err.message });
       });
+  });
 
-      // router.post("/shortid", function(req,res) {
-      //   queries(db)
-      //    .then(poll => {
-      //      res.render("thank_you");
-      //      return;
-      //    })
-      //    .catch(e => {
-      //      console.error(e);
-      //      res.send(e);
-      //    });
-      //   // console.log('hello', req.body.title)
-      //  });
+  // router.post("/shortid", function(req,res) {
+  //   queries(db)
+  //    .then(poll => {
+  //      res.render("thank_you");
+  //      return;
+  //    })
+  //    .catch(e => {
+  //      console.error(e);
+  //      res.send(e);
+  //    });
+  //   // console.log('hello', req.body.title)
+  //  });
 
-
-
-      router.post("/polls/:shortid", (req, res) => {
-        console.log("countVotes",req.body);
-        queries(db)
-        .countVotes()
-        .then(poll => {
-          console.log('data you asked for', poll)
-          res.render("thank_you");
-        })
-        .catch(e => {
-          console.error(e);
-          res.send(e)
-        });
+  router.post("/polls/:shortid", (req, res) => {
+    console.log("countVotes", req.body);
+    queries(db)
+      .countVotes()
+      .then(poll => {
+        console.log("data you asked for", poll);
+        res.render("thank_you");
+      })
+      .catch(e => {
+        console.error(e);
+        res.send(e);
       });
+  });
 
-    // The creator will be loged in and will be able to see previous polls
-    // Click on create and be redirected to the /polls/new where will fill out a new poll
-    return router;
-  };
+  // The creator will be loged in and will be able to see previous polls
+  // Click on create and be redirected to the /polls/new where will fill out a new poll
+  return router;
+};
 // The creator will be loged in and will be able to see previous polls
 // Click on create and be redirected to the /polls/new where will fill out a new poll
-
-
