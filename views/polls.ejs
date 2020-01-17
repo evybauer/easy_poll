@@ -13,8 +13,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Jura&display=swap" rel="stylesheet">
 
+
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/polls"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 
   </head>
   <%- include('./partials/header'); %>
@@ -35,13 +39,13 @@
 
 
         <div class="form-group">
-            <label for="title">Title: <span class="text-muted"></span></label>
-            <input name="title" type="text" class="form-control" id="title" placeholder="What do you want to poll?">
+            <label for="title">Question: <span class="text-muted"></span></label>
+            <input name="title" type="text" class="form-control" id="title" placeholder="What do you want to poll">
           </div>
 
         <div class="form-group">
-          <label for="description">Description</label><br>
-          <input name="polls_description" class="polls_desc_field">
+          <label for="description" >Description </label><br>
+          <textarea name="polls_description" class="polls_desc_field form-control" style="min-width: 100%" placeholder="What do you want to poll" >
 
         </input>
         </div>
@@ -64,16 +68,12 @@
 
         </div>
 
-        <div class ="add-option-div">
-            <p class="err" id="missing-option">Please fill out all of the options</p>
-            <button type="button" class="add-option btn btn-outline-danger">Add another option</button>
-          </div>
 
         <div class="form-group">
           <button class="btn btn-outline-success btn-lg btn-block" type="submit">Create Form</button>
-
         </div>
-      </form>
+
+        </form>
   </body>
 </html>
 
