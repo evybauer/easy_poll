@@ -148,7 +148,6 @@ module.exports = db => {
   router.get("/results", (req, res) => {
     // let shortid = 1;
 
-    console.log("here");
     db.query(
       `
       SELECT options.choice, options.description, options.vote_total, (SELECT polls.description AS question
@@ -161,6 +160,8 @@ module.exports = db => {
     )
       .then(data => {
         const widgets = data.rows;
+        console.log("results data", widgets);
+
         // res.json({ widgets });
         res.render("results", { widgets });
       })
