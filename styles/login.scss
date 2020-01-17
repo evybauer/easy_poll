@@ -1,8 +1,12 @@
 
 div.jumbotron.jumbotron-fluid {
-  background-color: #080300;
-  background-image: url("https://www.transparenttextures.com/patterns/diagmonds.png");
-  color: #FFF
+  // background-color: #080300;
+  // background-image: url("https://www.transparenttextures.com/patterns/diagmonds.png");
+  color: #FFF;
+}
+
+#login_header {
+  background-color: transparent !important;
 }
 
 .display-4 {
@@ -12,12 +16,13 @@ div.jumbotron.jumbotron-fluid {
 
 form{
   max-width: 500px;
-  background-color: rgba(0, 0, 0, 0.3);
+  // background-color: rgba(0, 0, 0, 0.3);
   margin: 0% 10%;
   padding: 25px;
   color: #fefefe;
   font-family: 'Jura', sans-serif;
 }
+
 
 //FOR THE 'HEADER' OF THE PAGE
 .container {
@@ -36,12 +41,16 @@ form{
   background-color: #262626;
 }
 canvas {
-    display:block;
-    background: #262626;
-    position: fixed;
-    z-index: -1;
+  display:block;
+  background: #262626;
+  position: fixed;
+  z-index: -1;
 }
 
 #mainElement {
   position: absolute;
+}
+
+div {
+  // background-color: rgba(0, 0, 0, 0.3) !important;
 }
