@@ -171,8 +171,11 @@ module.exports = db => {
         )
         .then(data => {
           const widgets = data.rows;
+          console.log("This is data", data);
+          console.log("This is widgets",widgets);
           // res.json({ widgets });
-          res.render("results", { widgets });
+
+          res.render("results", { widgets, polltitle:data.params.title});
         })
         .catch(err => {
           res
@@ -188,8 +191,11 @@ module.exports = db => {
 
         db.query(
           `
-          SELECT polls.title, polls.description AS poll_description, options.choice, options.description, options.poll_id FROM polls JOIN options ON polls.id=poll_id WHERE polls.id=$1          `,
-          [req.params.shortid]
+          SELECT polls.title, polls.description
+          AS poll_description, options.choice, options.description, options.poll_id
+          FROM polls JOIN options
+          ON polls.id=poll_id
+          WHERE polls.id=$1 `,[req.params.shortid]
         )
           .then(data => {
             const params = data.rows;

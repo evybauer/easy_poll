@@ -29,8 +29,32 @@
 // });
   </script>
 
-  </head>
-  <%- include('./partials/header'); %>
+<header>
+    <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+
+    <link href="https://fonts.googleapis.com/css?family=Electrolize&display=swap" rel="stylesheet">
+
+
+    <nav class="navbar navbar-expand-md justify-content-between">
+      <a class="navbar-brand" href="/">Logout</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+    </nav>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">Easy Poll</h1>
+          <p class="lead">An easy way to create polls and make decisions faster!</p>
+        </div>
+      </div>
+  </header>
+
+
+
+
 
   <body>
         <form>
@@ -59,10 +83,13 @@
             </ul>
           </form>
 
-          <div class="action_buttons">
               <form action="/new_poll" method="POST">
-                <button type="submit" class="btn btn-lg btn-outline-primary">Create Another Poll</button>
+                <div class="form-group">
+                    <button class="btn-new-form btn btn-outline-success btn-lg btn-block" type="submit">Create Another Pool</button>
+                  </div>
               </form>
-          </div>
+
+
+
   </body>
 </html>

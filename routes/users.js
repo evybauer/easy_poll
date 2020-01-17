@@ -56,7 +56,7 @@ module.exports = (dbHelpers) => {
 
     router.get("/home", (req, res) => {
       req.session = null;
-      res.render("/home");
+      res.render("home");
     });
 
 
