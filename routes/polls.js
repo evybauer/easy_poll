@@ -167,9 +167,11 @@ module.exports = db => {
 
     db.query(queryString, [2])
       .then(data => {
+        console.log("results page",poll_result.options.vote_total);
         const results = data.rows;
         // console.log("results data", results[0].question);
         res.render("results", { results });
+
       })
       .catch(err => {
         res.status(500).json({ error: err.message });
