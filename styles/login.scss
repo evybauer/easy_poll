@@ -7,6 +7,12 @@ div.jumbotron.jumbotron-fluid {
 
 #login_header {
   background-color: transparent !important;
+  width: 100vw;
+}
+
+#sign-in {
+  width: 25%;
+  margin: auto;
 }
 
 .display-4 {
@@ -31,8 +37,12 @@ form{
 }
 
 .login-container {
-  max-width: 640px;
+  max-width: 550px;
   margin: auto;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 #particles-js {
@@ -49,8 +59,4 @@ canvas {
 
 #mainElement {
   position: absolute;
-}
-
-div {
-  // background-color: rgba(0, 0, 0, 0.3) !important;
 }
